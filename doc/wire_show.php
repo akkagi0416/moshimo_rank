@@ -60,6 +60,10 @@
             </div>
           </div>
         </section>
+        <section>
+          <h3>グラフ</h3>
+          <div id="curve_chart" style="height: 400px;"></div>
+        </section>
       </div>
     </div>
   </div>
@@ -71,6 +75,31 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script>
+    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart(){
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'Sales', 'Expenses'],
+        ['2004',  1000,      400],
+        ['2005',  1170,      460],
+        ['2006',  660,       1120],
+        ['2007',  1030,      540]
+      ]);
+
+      var options = {
+      title: 'Company Performance',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+      chart.draw(data, options);
+    };
+  </script>
   <style>
     .nav_wrap{
       background-color: #eee;
