@@ -17,8 +17,11 @@ class MoshimoTest < ActiveSupport::TestCase
   end
 
   test "moshimo:make_ranking" do
-    assert_match /\d+/, Ranking.first.article_id.to_s
+    first_id = Ranking.first.article_id
+    assert_match /\d+/, first_id.to_s
+    # dbに保存できていること
     assert_not_equal 0, Ranking.count
+    # dbに重複して保存していないこと
+    assert_equal 1, Ranking.where(article_id: first_id).count
   end
-
 end

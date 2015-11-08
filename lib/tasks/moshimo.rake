@@ -31,47 +31,12 @@ namespace :moshimo do
   end
 
   def save_data(category, doc)
-    ranking = []
     doc.xpath('//Article').each_with_index do |node, i|
       article_id = node.xpath('ArticleId').text
-      ranking.push article_id
-      Ranking.create(category: category, ranking: i + 1, article_id: article_id)
+      # その日初めてならdbへ保存
+      if Ranking.where(created_at: Time.now.all_day).where("category = ?", category).count == 0
+        Ranking.create(category: category, ranking: i + 1, article_id: article_id)
+      end
     end
-    ranking
   end
 end
-
-
-
-# class Tasks::Moshimo
-#
-#   def self.make_ranking
-#     doc = get_data('01')
-#     p doc
-#   end
-#
-#   # private
-#     def get_data(category)
-#       url = "http://api.moshimo.com/article/search2"
-#         + "&authorization_code=#{AUTHORIZATION_CODE}"
-#         + "&article_category_code=#{category}"
-#       begin
-#         doc = Nokogiri::XML(open(url))
-#       rescue => e
-#         Rails.logger.error e
-#       end
-#  
-#       doc
-#     end
-#   #
-#   #   def save_data(category, doc)
-#   #     ranking = []
-#   #     doc.xpath('//Article').each_with_index do |node, i|
-#   #       article_id = node.xpath('ArticleId').text
-#   #       ranking.push article_id
-#   #       Ranking.create(category: category, ranking: i + 1, article_id: article_id)
-#   #     end
-#   #     p Ranking.all
-#   #     ranking
-#   #   end
-# end
