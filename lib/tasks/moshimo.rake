@@ -1,3 +1,7 @@
+# TODO: crontab導入(whenever)
+# TODO: junゼミ,allのranking取得
+# TODO: 感想、購入理由の取得
+
 require 'open-uri'
 require 'dotenv'
 require 'nokogiri'
@@ -9,9 +13,13 @@ namespace :moshimo do
   desc 'moshimo apiでランキング取得&保存'
   logger = Logger.new("#{Rails.root}/log/moshimo.log")
 
+
   task make_ranking: :environment do
-    doc = get_data('01')
-    save_data('01', doc)
+    1.upto(3) do |i|
+      category = sprintf("%02d", i)
+      doc = get_data(category)
+      save_data(category, doc)
+    end
     logger.info 'finish make_ranking'
   end
 
@@ -23,7 +31,7 @@ namespace :moshimo do
 
     begin
       doc = Nokogiri::XML(open(url))
-      doc = Nokogiri::XML(open("#{Rails.root}/lib/tasks/test.xml"))
+      # doc = Nokogiri::XML(open("#{Rails.root}/lib/tasks/test.xml"))
     rescue => e
       logger.error e
     end
@@ -32,7 +40,7 @@ namespace :moshimo do
   end
 
   def save_data(category, doc)
-    # return if save_already?(category)
+    return if save_already?(category)
     doc.xpath('//Article').each_with_index do |node, i|
       article_id = node.xpath('ArticleId').text.to_i
       Ranking.create(category: category, ranking: i + 1, article_id: article_id)
