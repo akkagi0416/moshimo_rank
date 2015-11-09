@@ -6,24 +6,30 @@
   <ol>
     <% @rankings.each do |ranking| %>
       <% article = ranking.article %>
-      <p><%= ranking.ranking %></p>
-      <p><%= article.name %></p>
-      <table class="table">
-        <tr>
-          <th>卸価格</th>
-          <th>最低販売価格</th>
-          <th>利益</th>
-          <th>利益率</th>
-          <th>販売価格</th>
-        </tr>
-        <tr>
-          <td><%= article.wholesale_price %></td>
-          <td><%= article.minimum_price %></td>
-          <td><%= article.default_profit_price %></td>
-          <td><%= article.default_profit_rate %></td>
-          <td><%= article.shop_price %></td>
-        </tr>
-      </table>
+      <div class="media">
+        <div class="media-left">
+          <%= link_to image_tag("http://image.moshimo.com/item_image/#{article.image_code}/1/m.jpg"), "#" %>
+        </div>
+        <div class="media-body">
+          <h3 class="media-heading"><%= link_to article.name, "#" %> (ID: <%= article.article_id %>)</h3>
+          <table class="table">
+            <tr>
+              <th>卸価格</th>
+              <th>最低販売価格</th>
+              <th>利益</th>
+              <th>利益率</th>
+              <th>販売価格</th>
+            </tr>
+            <tr>
+              <td><%= article.wholesale_price %></td>
+              <td><%= article.minimum_price %></td>
+              <td><%= article.default_profit_price %></td>
+              <td><%= article.default_profit_rate %></td>
+              <td><%= article.shop_price %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
     <% end %>
   </ol>
   <%= will_paginate @rankings, renderer: BootstrapPagination::Rails %>
