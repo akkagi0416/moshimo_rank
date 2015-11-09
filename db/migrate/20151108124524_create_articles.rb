@@ -1,4 +1,5 @@
 class CreateArticles < ActiveRecord::Migration
+  # TODO: indexを付ける
   def change
     create_table :articles, id: false do |t|
       t.column   :article_id,  "INTEGER PRIMARY KEY NOT NULL"

@@ -5,6 +5,7 @@ gem 'dotenv-rails'
 gem 'bootstrap-sass'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'whenever', :require => false
 
 gem 'rails', '4.2.4'
 gem 'sqlite3'
