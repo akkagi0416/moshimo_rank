@@ -19,7 +19,8 @@ namespace :moshimo do
   def get_data(category)
     url = "http://api.moshimo.com/article/search2" +
           "&authorization_code=#{AUTHORIZATION_CODE}" +
-          "&article_category_code=#{category}"
+          "&article_category_code=#{category}" +
+          "&sort_order=sales"
 
     begin
       doc = Nokogiri::XML(open(url))
