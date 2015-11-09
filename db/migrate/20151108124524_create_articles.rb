@@ -1,7 +1,7 @@
 class CreateArticles < ActiveRecord::Migration
   def change
-    create_table :articles, { id: false } do |t|
-      t.column   :article_id, "INTEGER PRIMARY KEY NOT NULL"
+    create_table :articles, id: false do |t|
+      t.column   :article_id,  "INTEGER PRIMARY KEY NOT NULL"
       t.string   :name
       t.text     :description
       t.text     :special_description
@@ -35,7 +35,7 @@ class CreateArticles < ActiveRecord::Migration
       t.integer  :recommended_price
       t.integer  :minimum_price
       t.integer  :wholesale_price
-      t.integer  :whop_price
+      t.integer  :shop_price
       t.integer  :stock_status
       t.string   :stock_status_word
 

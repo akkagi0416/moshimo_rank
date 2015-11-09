@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20151108124524) do
     t.integer  "recommended_price"
     t.integer  "minimum_price"
     t.integer  "wholesale_price"
-    t.integer  "whop_price"
+    t.integer  "shop_price"
     t.integer  "stock_status"
     t.string   "stock_status_word"
     t.datetime "created_at",           null: false

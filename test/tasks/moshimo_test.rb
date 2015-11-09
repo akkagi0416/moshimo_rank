@@ -23,5 +23,8 @@ class MoshimoTest < ActiveSupport::TestCase
     assert_not_equal 0, Ranking.count
     # dbに重複して保存していないこと
     assert_equal 1, Ranking.where(article_id: first_id).count
+    # Articleを保存していること
+    assert_not_equal 0, Article.count
+    assert_match /\d+/, Article.first.shop_price.to_s
   end
 end
