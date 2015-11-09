@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 # add gem
 gem 'dotenv-rails'
+gem 'bootstrap-sass'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 gem 'rails', '4.2.4'
 gem 'sqlite3'

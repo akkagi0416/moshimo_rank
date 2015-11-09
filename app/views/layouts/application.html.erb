@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MoshimoRank</title>
+  <title><%= @title %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <div class="container">
+      <h1 class="logo">logo</h1>
+    </div>
+    <div class="nav_wrap">
+      <div class="container">
+        <nav>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">menu1</a></li>
+            <li><a href="#">menu2</a></li>
+            <li><a href="#">menu3</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-<%= yield %>
+  <div class="container">
+    <div class="row">
+      <aside class="col-md-3">
+        <div><input type="radio" name="radio" id="radio1"><label for="radio1">フード・ドリンク・スイーツ</label></div>
+        <div><input type="radio" name="radio" id="radio2"><label for="radio2">ファッション</label></div>
+        <div><input type="radio" name="radio" id="radio3"><label for="radio3">AV・デジモノ</label></div>
+        <button class="btn btn-primary">検索</button>
+      </aside>
+      <div class="col-md-9">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 
+  <footer>
+  </footer>
 </body>
 </html>

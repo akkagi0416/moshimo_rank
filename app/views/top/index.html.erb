@@ -1,0 +1,30 @@
+<% @title = 'moshimo ranking' %>
+
+<section>
+  <h2>Ranking</h2>
+  <%= will_paginate @rankings, renderer: BootstrapPagination::Rails %>
+  <ol>
+    <% @rankings.each do |ranking| %>
+      <% article = ranking.article %>
+      <p><%= ranking.ranking %></p>
+      <p><%= article.name %></p>
+      <table class="table">
+        <tr>
+          <th>卸価格</th>
+          <th>最低販売価格</th>
+          <th>利益</th>
+          <th>利益率</th>
+          <th>販売価格</th>
+        </tr>
+        <tr>
+          <td><%= article.wholesale_price %></td>
+          <td><%= article.minimum_price %></td>
+          <td><%= article.default_profit_price %></td>
+          <td><%= article.default_profit_rate %></td>
+          <td><%= article.shop_price %></td>
+        </tr>
+      </table>
+    <% end %>
+  </ol>
+  <%= will_paginate @rankings, renderer: BootstrapPagination::Rails %>
+</section>
