@@ -1,5 +1,4 @@
 class CreateRankings < ActiveRecord::Migration
-  # TODO: indexを付ける
   def change
     create_table :rankings do |t|
       t.references :article, index: true, foreign_key: true
@@ -8,5 +7,8 @@ class CreateRankings < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :rankings, :created_at
+    add_index :rankings, :category
   end
 end

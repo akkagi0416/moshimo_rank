@@ -1,5 +1,3 @@
-# TODO: crontab導入(whenever)
-# TODO: junゼミ,allのranking取得
 # TODO: 感想、購入理由の取得
 
 require 'open-uri'
@@ -15,19 +13,31 @@ namespace :moshimo do
 
 
   task make_ranking: :environment do
-    1.upto(3) do |i|
-      category = sprintf("%02d", i)
+    categories = 1.upto(10).map{|i| "%02d" % i } # ( '01', '02'...'10' )
+    categories.push('jun', 'all')                # junゼミ検索と全商品を追加
+    categories.each do |category|
       doc = get_data(category)
       save_data(category, doc)
+      logger.info "category(#{category}) finish"
     end
     logger.info 'finish make_ranking'
   end
 
   def get_data(category)
-    url = "http://api.moshimo.com/article/search2" +
-          "&authorization_code=#{AUTHORIZATION_CODE}" +
-          "&article_category_code=#{category}" +
-          "&sort_order=sales"
+    url_base = "http://api.moshimo.com/article/search2" +
+               "&authorization_code=#{AUTHORIZATION_CODE}" +
+               "&sort_order=sales" +
+               "&list_per_page=100"
+    # categoryごとにapi変数を変更
+    if category =~ /\d\d/
+      url = url_base + "&article_category_code=#{category}"
+    elsif category == 'jun'
+      url = url_base + "&words=br" + "&default_profit_price_from=2000"
+    elsif category == 'all'
+      url = url_base + "&words=br"    # wordsのbr検索で全件対象
+    else
+      url = url_base + "&article_category_code=01"
+    end
 
     begin
       doc = Nokogiri::XML(open(url))

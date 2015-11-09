@@ -63,5 +63,7 @@ ActiveRecord::Schema.define(version: 20151108124524) do
   end
 
   add_index "rankings", ["article_id"], name: "index_rankings_on_article_id"
+  add_index "rankings", ["category"], name: "index_rankings_on_category"
+  add_index "rankings", ["created_at"], name: "index_rankings_on_created_at"
 
 end
