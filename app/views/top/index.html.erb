@@ -12,20 +12,16 @@
         </div>
         <div class="media-body">
           <h3 class="media-heading"><%= link_to article.name, "#" %> (ID: <%= article.article_id %>)</h3>
-          <table class="table">
+          <table class="price">
             <tr>
-              <th>卸価格</th>
-              <th>最低販売価格</th>
               <th>利益</th>
               <th>利益率</th>
               <th>販売価格</th>
             </tr>
             <tr>
-              <td><%= article.wholesale_price %></td>
-              <td><%= article.minimum_price %></td>
-              <td><%= article.default_profit_price %></td>
-              <td><%= article.default_profit_rate %></td>
-              <td><%= article.shop_price %></td>
+              <td class="default_profit_price"><%= article.default_profit_price %>円</td>
+              <td class="default_profit_rate"><%= article.default_profit_rate %>%</td>
+              <td class="shop_price"><%= article.shop_price %>円</td>
             </tr>
           </table>
         </div>

@@ -4,6 +4,18 @@
 .nav_wrap{
   background-color: #eee;
 }
+.price{
+  th, td{
+    padding: 2px;
+    font-size: 0.85em;
+    font-weight: normal;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  .default_profit_price{
+    color: red;
+  }
+}
 .media-heading{
   font-size: 1em;
 }
