@@ -13,7 +13,7 @@ namespace :moshimo do
 
 
   task make_ranking: :environment do
-    categories = 1.upto(10).map{|i| "%02d" % i } # ( '01', '02'...'10' )
+    categories = 1.upto(9).map{|i| "%02d" % i } # ( '01', '02'...'09' )
     categories.push('jun', 'all')                # junゼミ検索と全商品を追加
     categories.each do |category|
       doc = get_data(category)

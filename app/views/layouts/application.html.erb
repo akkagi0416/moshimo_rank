@@ -27,7 +27,7 @@
   <div class="container">
     <div class="row">
       <aside class="col-md-2">
-        <% 1.upto(10).map{|i| "%02d" % i }.push('jun', 'all').each do |category| %>
+        <% 1.upto(9).map{|i| "%02d" % i }.push('jun', 'all').each do |category| %>
           <div><%= link_to MY_APP['category'][category], rankings_path(category) %></div>
         <% end %>
         <button class="btn btn-primary">検索</button>
