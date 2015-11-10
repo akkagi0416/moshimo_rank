@@ -1,0 +1,20 @@
+one:
+  article_id: 1
+  category: '01'
+  ranking: 1
+  created_at: <%= 1.day.ago %>
+two:
+  article_id: 2
+  category: '01'
+  ranking: 2
+  created_at: <%= 1.day.ago %>
+three:
+  article_id: 3
+  category: '02'
+  ranking: 1
+  created_at: <%= 1.day.ago %>
+four:
+  article_id: 4
+  category: '02'
+  ranking: 2
+  created_at: <%= 1.day.ago %>

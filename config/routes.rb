@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'articles/show'
+
   # resources :rankings, only: [:show]
 
   root "top#index"

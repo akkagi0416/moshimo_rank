@@ -1,11 +1,24 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+item1:
+  article_id: 1
+  name: 'item1'
+  default_profit_rate: 1
+  default_profit_price: 100
+  shop_price: 110
+item2:
+  article_id: 2
+  name: 'item2'
+  default_profit_rate: 2
+  default_profit_price: 200
+  shop_price: 220
+item3:
+  article_id: 3
+  name: 'item3'
+  default_profit_rate: 3
+  default_profit_price: 300
+  shop_price: 330
+item4:
+  article_id: 4
+  name: 'item4'
+  default_profit_rate: 4
+  default_profit_price: 400
+  shop_price: 440
