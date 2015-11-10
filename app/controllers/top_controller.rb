@@ -1,6 +1,7 @@
 class TopController < ApplicationController
+  include ApplicationHelper
+
   def index
-    @rankings = Ranking.where(created_at: Time.now.all_day).where(category: '01')
-      .paginate(page: params[:page], per_page: 10)
+    @rankings = get_ranking(category: '01')
   end
 end

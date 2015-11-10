@@ -25,5 +25,7 @@ module MoshimoRank
 
     # for my task
     config.autoload_paths += Dir["#{config.root}/lib"]
+
+    config.web_console.whitelisted_ips = '192.168.0.0/16'
   end
 end
