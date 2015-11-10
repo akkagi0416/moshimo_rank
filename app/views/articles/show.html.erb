@@ -1,2 +1,24 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<% @title = @article.name %>
+<h1><%= @title %></h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag("http://image.moshimo.com/item_image/#{@article.image_code}/1/l.jpg", class: "img-responsive") %>
+  </div>
+  <div class="col-md-8">
+    <table class="table">
+      <tr>
+        <th>商品ID</th>
+        <td><%= @article.article_id %></td>
+      </tr>
+      <tr>
+        <th>販売価格(税込)</th>
+        <td><%= @article.shop_price %>円</td>
+      </tr>
+      <tr>
+        <th>利益(税込)</th>
+        <td><%= @article.default_profit_price %>円 <%= @article.default_profit_rate %>%</td>
+      </tr>
+    </table>
+  </div>
+</div>

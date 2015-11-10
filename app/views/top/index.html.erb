@@ -8,10 +8,11 @@
       <% article = ranking.article %>
       <div class="media">
         <div class="media-left">
-          <%= link_to image_tag("http://image.moshimo.com/item_image/#{article.image_code}/1/s.jpg"), "#" %>
+          <p class="ranking"><%= ranking.ranking %></p>
+          <%= link_to image_tag("http://image.moshimo.com/item_image/#{article.image_code}/1/s.jpg"), article_path(article.article_id) %>
         </div>
         <div class="media-body">
-          <h3 class="media-heading"><%= link_to article.name, "#" %> (ID: <%= article.article_id %>)</h3>
+          <h3 class="media-heading"><%= link_to article.name, article_path(article.article_id) %> (ID: <%= article.article_id %>)</h3>
           <table class="price">
             <tr>
               <th>利益</th>
