@@ -1,24 +1,60 @@
 <% @title = @article.name %>
 <h1><%= @title %></h1>
 
-<div class="row">
-  <div class="col-md-4">
-    <%= image_tag("http://image.moshimo.com/item_image/#{@article.image_code}/1/l.jpg", class: "img-responsive") %>
+<section>
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag("http://image.moshimo.com/item_image/#{@article.image_code}/1/l.jpg", class: "img-responsive") %>
+    </div>
+    <div class="col-md-8">
+      <table class="table">
+        <tr>
+          <th>商品ID</th>
+          <td><%= @article.article_id %></td>
+        </tr>
+        <tr>
+          <th>販売価格(税込)</th>
+          <td><%= @article.shop_price %>円</td>
+        </tr>
+        <tr>
+          <th>利益(税込)</th>
+          <td><%= @article.default_profit_price %>円 <%= @article.default_profit_rate %>%</td>
+        </tr>
+      </table>
+    </div>
   </div>
-  <div class="col-md-8">
-    <table class="table">
-      <tr>
-        <th>商品ID</th>
-        <td><%= @article.article_id %></td>
-      </tr>
-      <tr>
-        <th>販売価格(税込)</th>
-        <td><%= @article.shop_price %>円</td>
-      </tr>
-      <tr>
-        <th>利益(税込)</th>
-        <td><%= @article.default_profit_price %>円 <%= @article.default_profit_rate %>%</td>
-      </tr>
-    </table>
-  </div>
-</div>
+</section>
+
+<section>
+  <div id="chart"></div>
+  <% @article.rankings.each do |r| %>
+    <p><%= r.category %> <%= r.ranking %></p>
+  <% end %>
+</section>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<% data = '
+  ["Year", "Sales", "Expenses"],
+  ["2004",  1000,      400],
+  ["2005",  1170,      460],
+  ["2006",  660,       1120],
+  ["2007",  1030,      540]
+'
+%>
+<%= javascript_tag do %>
+  google.load('visualization', '1', {packages: ['corechart', 'line']});
+  google.setOnLoadCallback(drawChart);
+
+  function drawChart(){
+    var data = new google.visualization.arrayToDataTable([
+      <%= data.html_safe %>
+    ]);
+
+    var options = {
+//    curveType: 'function',
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    chart.draw(data, options);
+  }
+<% end %>
