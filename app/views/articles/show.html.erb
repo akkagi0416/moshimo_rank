@@ -27,28 +27,30 @@
 
 <section>
   <div id="chart"></div>
-  <% @article.rankings.each do |r| %>
-    <p><%= r.category %> <%= r.ranking %></p>
-  <% end %>
 </section>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<% data = '
-  ["Year", "Sales", "Expenses"],
-  ["2004",  1000,      400],
-  ["2005",  1170,      460],
-  ["2006",  660,       1120],
-  ["2007",  1030,      540]
-'
+<%
+  category_rankings = @rankings.where(category: @category)
+  all_rankings      = @rankings.where(category: 'all')
+  data = "["
+  category_rankings.each do |row|
+    all_ranking = all_rankings.where(created_at: row.created_at.all_day).first
+    all_ranking = all_ranking ? all_ranking.ranking : 0
+    data += %Q{ [new Date('#{row.created_at.strftime('%Y-%m-%d')}'), #{row.ranking}, #{all_ranking}], } 
+  end
+  data += "]"
 %>
 <%= javascript_tag do %>
   google.load('visualization', '1', {packages: ['corechart', 'line']});
   google.setOnLoadCallback(drawChart);
 
   function drawChart(){
-    var data = new google.visualization.arrayToDataTable([
-      <%= data.html_safe %>
-    ]);
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', '日付');
+    data.addColumn('number', '<%= MY_APP["category"][@category] %>');
+    data.addColumn('number', '全商品');
 
+    data.addRows(<%= data.html_safe %>);
     var options = {
 //    curveType: 'function',
       legend: { position: 'bottom' }
