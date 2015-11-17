@@ -12,9 +12,15 @@ namespace :moshimo do
   logger = Logger.new("#{Rails.root}/log/moshimo.log")
 
 
-  task make_ranking: :environment do
+  task :make_ranking, ['category'] => :environment do |task, args|
     categories = 1.upto(9).map{|i| "%02d" % i } # ( '01', '02'...'09' )
     categories.push('jun', 'all')                # junゼミ検索と全商品を追加
+
+    # rake moshimo:make_ranking['all']でallのみ実行
+    if args['category'] != nil
+      categories = categories.select{|e| e == args['category'] }
+    end
+
     categories.each do |category|
       doc = get_data(category)
       save_data(category, doc)
